@@ -1,11 +1,8 @@
-const Card = ({ card, isSelected, isMatched, onClick }) => {
+const Card = ({ card, isSelected, onClick }) => {
     return (
         <button
             onClick={onClick}
-            disabled={isMatched}
-            className={`card ${
-                isMatched ? "correct" : isSelected ? "selected" : ""
-            }`}
+            className={`card ${isSelected ? "selected" : ""}`}
         >
             {card.text}
         </button>

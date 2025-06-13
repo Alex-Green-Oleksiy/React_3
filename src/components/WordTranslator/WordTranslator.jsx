@@ -41,15 +41,17 @@ const WordTranslator = () => {
     return (
         <div className="word-translator">
             <div className="cards">
-                {cards.map((card) => (
-                    <Card
-                        key={card.id}
-                        card={card}
-                        isSelected={selected.some((c) => c.id === card.id)}
-                        isMatched={matched.includes(card.pairId)}
-                        onClick={() => handleCardClick(card)}
-                    />
-                ))}
+                {cards
+                    .filter((card) => !matched.includes(card.pairId)) // Фільтруємо знайдені пари
+                    .map((card) => (
+                        <Card
+                            key={card.id}
+                            card={card}
+                            isSelected={selected.some((c) => c.id === card.id)}
+                            isMatched={false} // Більше не потрібно, бо ми фільтруємо
+                            onClick={() => handleCardClick(card)}
+                        />
+                    ))}
             </div>
             {matched.length === WORDS.length && (
                 <div className="success-message">
@@ -58,6 +60,7 @@ const WordTranslator = () => {
             )}
         </div>
     );
+
 };
 
 export default WordTranslator;
